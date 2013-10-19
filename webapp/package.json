@@ -1,0 +1,23 @@
+{
+  "name": "grap-info",
+  "version": "0.0.0",
+  "description": "汇集了一些有意思的模块页面",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamjoel/grabInfo.git"
+  },
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/iamjoel/grabInfo/issues"
+  },
+  "devDependencies": {
+    "express": "~3.4.2",
+    "express-partials": "~0.1.1",
+    "ejs": "~0.8.4"
+  }
+}

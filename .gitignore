@@ -1,0 +1,12 @@
+###############
+#    folder   #
+###############
+# ignore不管在哪个子项目下的node_modules
+*/node_modules
+
+
+
+###############
+#  fixed file #
+###############
+*.log
