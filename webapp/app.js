@@ -45,7 +45,9 @@ app.configure('production', function(){
 });
 
 routes(app);
-app.listen(config.port);
-console.log("server start listen " + config.port);
+app.listen(config.port,function(){
+  console.log("server start listen " + config.port);  
+});
+
 
 

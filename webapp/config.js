@@ -4,7 +4,10 @@ var config = {
         index:'/'    
     },
     adminRoutes:{ //管理页面    
-    }
+    },
+    showModules:['weatherReport'],//显示的module
+
+  
 };
 
 

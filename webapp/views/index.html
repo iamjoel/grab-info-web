@@ -1,24 +1,16 @@
-<div class="col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-heading">天气预报</div>
-      <div class="panel-body">
-        今天天气
-      </div>
-    </div>
-</div>
-<div class="col-md-9">
-    <div class="panel panel-default">
-      <div class="panel-heading">星座运势</div>
-      <div class="panel-body">
-        射手座。。。
-      </div>
-    </div>
-</div>
-<div class="col-md-9">
-    <div class="panel panel-default">
-      <div class="panel-heading">淘宝热卖</div>
-      <div class="panel-body">
-        热卖
-      </div>
-    </div>
-</div>
+<% modules.forEach(function(module){ %>
+<div class="<%= module.width %>" id = "<%= module.id %>">
+  <div class="panel panel-default">
+      <div class="panel-heading"><%= module.name %></div>
+      <div class="panel-body"><!--有js来渲染 --></div>
+  </div>
+<% }); %>
+
+<script type="text/javascript">
+   $(function() {
+     <% modules.forEach(function(module){ %>
+        seajs.use('<%= "/public/modules/" + module.id + "/main.js" %>')
+     <% }); %>
+   });
+</script>
+
