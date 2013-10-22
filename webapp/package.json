@@ -19,6 +19,8 @@
     "express": "~3.4.2",
     "express-partials": "~0.1.1",
     "ejs": "~0.8.4",
-    "lodash": "~2.2.1"
+    "lodash": "~2.2.1",
+    "cheerio": "~0.12.3",
+    "nodegrass": "0.0.1"
   }
 }

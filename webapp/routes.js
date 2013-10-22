@@ -2,11 +2,13 @@ var config = require('./config'),
     indexPage = require('./controllers/index');
    
 
-
-
 module.exports = function(app){
     //
     app.get(config.userRoutes.index,indexPage.render);
+
+    //modules api
+    //天气预报模块
+    app.get(config.apiRoutes.weatherReport,require('./controllers/weatherReport').api)
  
 
     //404页面
