@@ -1,9 +1,25 @@
 
-	<!-- todo 待改成bootstrap风格的 -->
-	天气<%= weather%></br>
-	最低温度<%= tempMin %></br>
-	最高温度<%= tempMax %></br>
-	风力<%= wind %></br>
+<!-- todo 待改成bootstrap风格的 -->
+<span class = "wetherIcon col-xs-3  <%= icon %>" title = "<%= weather %>"></span> 
+<div class="col-xs-9 wetherDetailWrap">
+	<h2 >苏州</h2>
+	<dl class = "row">
+		<dt class = "col-md-4">最低温度</dt>
+		<dd class = "col-md-8"><%= tempMin %></dd>
+	</dl>
+	<dl class = "row">
+		<dt class = "col-md-4">最高温度</dt>
+		<dd class = "col-md-8"><%= tempMax %></dd>
+	</dl>
+	<dl class = "row">
+		<dt class = "col-md-4">风力</dt>
+		<dd class = "col-md-8"><%= wind %></dd>
+	</dl>
+	<div class="row suggWrap">
+		<p><%= sugg %><p>
+	</div>
+</div>
+	
 
 
 

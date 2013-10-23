@@ -43,7 +43,15 @@ function proccessWeatherData(data){
 	todayWeatherData.tempMin = weatherTrendData[0].tempMin;
 	todayWeatherData.tempMax = weatherTrendData[0].tempMax;
 	todayWeatherData.weather = weatherTrendData[0].weather;
+	if(todayWeatherData.weather == "晴" || todayWeatherData.weather == "多云转晴"){
+		todayWeatherData.icon = 'sunny';
+	}else if(todayWeatherData.weather == "多云" || todayWeatherData.weather == "阴" || todayWeatherData.weather.indexOf('阴') > 0){
+		todayWeatherData.icon = 'cloudy';
+	}else{
+		todayWeatherData.icon = 'runny';
+	}
 	todayWeatherData.wind = data.wind1;
+	todayWeatherData.sugg = data.index_d;//建议
 
 	return {
 		today : todayWeatherData,

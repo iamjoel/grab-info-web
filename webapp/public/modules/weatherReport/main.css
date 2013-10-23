@@ -1,0 +1,34 @@
+.wetherIcon{
+	background-image: url('weatherIcons.jpg');
+	background-repeat: no-repeat;
+	height: 114px;
+}
+.sunny{
+	background-position: -44px -202px;
+}
+.cloudy{
+	background-position: -410px -202px;
+}
+.runny{
+	background-position: -47px -572px;
+}
+
+
+#weatherReport .tab-pane{
+	height: 500px;
+}
+.wetherDetailWrap{
+	font-style: 16px;
+}
+.wetherDetailWrap .suggWrap{
+	padding: 0 15px;
+	text-indent: 2em;
+	font-weight: bold;
+}
+.wetherDetailWrap .row{
+	margin-top:0; 
+	margin-bottom:10px;
+}
+.wetherDetailWrap h2{
+	margin-top: 0;
+}

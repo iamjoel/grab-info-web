@@ -1,5 +1,6 @@
 define(function(require){
 	require('lodash.min');
+	require('/public/modules/weatherReport/main.css');
 	var tpl = require('/public/modules/weatherReport/main.html#'),
 		panelBody;
 	panelBody = _.template(tpl);

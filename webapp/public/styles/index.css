@@ -1,3 +1,9 @@
 #main{
     margin-top:100px;
 }
+body .nav-tabs li:first{
+	padding-left: 10px;
+}
+body .tab-pane{
+	padding: 20px;
+}
