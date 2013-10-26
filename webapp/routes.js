@@ -1,14 +1,21 @@
 var config = require('./config'),
-    indexPage = require('./controllers/index');
+    indexPage = require('./controllers/index'),
+    showModules = config.showModules,
+    modulePath = './modules',
+    _ = require('lodash');
    
 
 module.exports = function(app){
-    //
     app.get(config.userRoutes.index,indexPage.render);
-
-    //modules api
-    //天气预报模块
-    app.get(config.apiRoutes.weatherReport,require('./controllers/weatherReport').api)
+    //modules api 异步接口
+    showModules.forEach(function(moduleName){
+        var eachModuleConfig = require([modulePath,moduleName,'config'].join('/'));
+        if(eachModuleConfig.api && _.isArray(eachModuleConfig.api)){
+            eachModuleConfig.api.forEach(function(api){
+                app.get(api.path,require([modulePath,moduleName,'controller'].join('/'))[api.name])
+            })
+        }
+    })
  
 
     //404页面

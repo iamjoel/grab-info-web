@@ -67,5 +67,6 @@ function proccessWeatherData(data){
 }
 getWeatherReport('suzhou');
 
-module.exports = getWeatherReport
-
+module.exports = {
+	'getWeatherReport':getWeatherReport
+}

@@ -1,11 +1,11 @@
-var service = require('../service/weatherReport');
+var service = require('./service');
 function weatherReport(req,res){
 	var cityCode = req.params.cityName;
-	service(cityCode,function(data){
+	service.getWeatherReport(cityCode,function(data){
 		res.send(data);
 	});
 };
 
 module.exports = {
-	api:weatherReport
+	weatherReport:weatherReport
 };
