@@ -32,3 +32,14 @@
 .wetherDetailWrap h2{
 	margin-top: 0;
 }
+
+#weatherTip{
+	position: absolute;
+	display: none;
+	padding: 5px;
+	border: 2px solid #ccc;
+	font-size: 14px;
+	line-height: 20px;
+	opacity: 0.8; 
+
+}

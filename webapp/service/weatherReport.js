@@ -15,14 +15,21 @@ function getWeatherReport(cityName,callback) {
 	}else{
 		url = 'http://m.weather.com.cn/data/'+ cityCode +'.html';
 		nodegrass.get(url,function(data,status,headers){
-			var data = JSON.parse(data),
-				weatherData = proccessWeatherData(data.weatherinfo);;
+			try{
+				var data = JSON.parse(data),
+				weatherData = proccessWeatherData(data.weatherinfo);
+				callback && callback({
+					code:'1',
+					data: weatherData
+				});
+			}catch(e){
+				console.error(e);
+				callback({
+					code:'0',
+					data:url + ': error' 
+				});
+			}
 			
-			// console.log(weatherData);
-			callback && callback({
-				code:'1',
-				data: weatherData
-			});
 		});
 	}
 	
@@ -35,8 +42,8 @@ function proccessWeatherData(data){
 		minAndMaxReg = /(\d+)℃~(\d+)℃/;
 	for(var i = 1,len = 6; i <= len; i++){
 		weatherTrendData.push({
-			tempMin:minAndMaxReg.exec(data['temp'+ i])[1],
-			tempMax:minAndMaxReg.exec(data['temp'+ i])[2],
+			tempMin:minAndMaxReg.exec(data['temp'+ i])[2],
+			tempMax:minAndMaxReg.exec(data['temp'+ i])[1],
 			weather : data['weather'+ i]
 		});
 	}
