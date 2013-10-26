@@ -2,6 +2,7 @@ define(function(require){
 	require('lodash.min');
 	require('moment.min');
 	require('/public/modules/weatherReport/main.css');
+	require('/public/styles/weather-icons/css/weather-icons.min.css');
 	require('/public/scripts/jquery.flot'); //chat插件
 	require('/public/scripts/jquery.flot.time'); //chat的x轴显示时间，否则只能显示数字
 
@@ -37,6 +38,19 @@ define(function(require){
 		dateType:'json'
 	}).done(function(data){
 		if(data.code == 1){
+			switch(data.data.today.weatherEn){
+				case 'sunny':
+					data.data.today.icon = 'wi-day-sunny';
+					break;
+				case 'cloudy':
+					data.data.today.icon = 'wi-day-cloudy';
+					break;
+				case 'rainy':
+					data.data.today.icon = 'wi-rain-mix';
+					break;
+				default:
+					data.data.today.icon = 'wi-day-sunny'
+			}
 			$todayWeatherCont.html(_.template(todayWeatherTemp,data.data.today));
 			var trendData = data.data.trend;
 
@@ -51,10 +65,13 @@ define(function(require){
 		}else{
 			$("#weatherTrend").html('服务器端错误，请刷新页面重试！');
 		}
-	})
+	}).always(function(){
+		$('#weatherReport .panel-body').unblock();
+	});
 
 	function initTempTrend(minTemp,maxTemp){
-		var $weatherTrendWrap = $("#weatherTrend");
+		var $weatherTrendWrap = $("#weatherTrend"),
+			now = moment();
 		$weatherTrendWrap.empty()
 		var plot = $.plot("#weatherTrend", [
 				{ data: minTemp, label: "最低温度"},
@@ -66,7 +83,11 @@ define(function(require){
 				 timezone:'browser',
 				 tickFormatter:function(date,axix){
 				 	date = moment(date);
-				 	return date.format('MM月DD日');
+				 	if(now.isSame(date,'day')){
+				 		return '今天'
+				 	}else{
+				 		return date.format('MM月DD日');
+				 	}
 				 },
 				 minTickSize: [1, "day"]
 
@@ -92,7 +113,7 @@ define(function(require){
 		$weatherTrendWrap.on('plothover',function(event, pos, data){
 			if(data){
 				showTooltip(data.pageX, data.pageY,
-					data.series.label+ "：" + data.datapoint[1] + '<br/>天气：' + weatherTrendArr[data.dataIndex]);
+					data.datapoint[1] + '℃<br/>' + weatherTrendArr[data.dataIndex]);
 			}else{
 				hideTooltip();
 			} 

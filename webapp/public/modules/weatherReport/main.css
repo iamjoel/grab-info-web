@@ -1,7 +1,8 @@
 .wetherIcon{
-	background-image: url('weatherIcons.jpg');
-	background-repeat: no-repeat;
-	height: 114px;
+	/*background-image: url('weatherIcons.jpg');
+	background-repeat: no-repeat;*/
+	font-size: 100px;
+	text-align: center;
 }
 .sunny{
 	background-position: -44px -202px;

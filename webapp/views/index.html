@@ -8,9 +8,15 @@
 
 <script type="text/javascript">
    $(function() {
-     <% modules.forEach(function(module){ %>
-        seajs.use('<%= "/public/modules/" + module.id + "/main.js" %>')
-     <% }); %>
+        var scriptsArr = ['/public/scripts/jquery.blockUI.js'];
+        <% modules.forEach(function(module){ %>
+            scriptsArr.push('<%= "/public/modules/" + module.id + "/main.js" %>');
+        <% }); %>
+        seajs.use(scriptsArr,function(){
+            $('.panel-body').block({
+                 message: null
+            });
+        });
    });
 </script>
 

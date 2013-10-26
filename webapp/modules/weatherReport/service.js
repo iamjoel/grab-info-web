@@ -51,11 +51,11 @@ function proccessWeatherData(data){
 	todayWeatherData.tempMax = weatherTrendData[0].tempMax;
 	todayWeatherData.weather = weatherTrendData[0].weather;
 	if(todayWeatherData.weather == "晴" || todayWeatherData.weather == "多云转晴"){
-		todayWeatherData.icon = 'sunny';
+		todayWeatherData.weatherEn = 'sunny';
 	}else if(todayWeatherData.weather == "多云" || todayWeatherData.weather == "阴" || todayWeatherData.weather.indexOf('阴') > 0){
-		todayWeatherData.icon = 'cloudy';
+		todayWeatherData.weatherEn = 'cloudy';
 	}else{
-		todayWeatherData.icon = 'runny';
+		todayWeatherData.weatherEn = 'rainy';
 	}
 	todayWeatherData.wind = data.wind1;
 	todayWeatherData.sugg = data.index_d;//建议
