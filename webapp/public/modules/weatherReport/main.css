@@ -33,6 +33,13 @@
 .wetherDetailWrap h2{
 	margin-top: 0;
 }
+.weatherTrendIcon{
+	position: absolute;
+	font-size: 20px;
+}
+#weatherTrendWrap{
+	position: relative;
+}
 
 #weatherTip{
 	position: absolute;

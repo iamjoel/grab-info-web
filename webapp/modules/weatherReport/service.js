@@ -41,22 +41,25 @@ function proccessWeatherData(data){
 		weatherTrendData = [],
 		minAndMaxReg = /(\d+)℃~(\d+)℃/;
 	for(var i = 1,len = 6; i <= len; i++){
+		var min = minAndMaxReg.exec(data['temp'+ i])[1],
+			max = minAndMaxReg.exec(data['temp'+ i])[2];
+		if(min > max){
+			var temp = min;
+			min = max;
+			max = temp; 
+		}
 		weatherTrendData.push({
-			tempMin:minAndMaxReg.exec(data['temp'+ i])[2],
-			tempMax:minAndMaxReg.exec(data['temp'+ i])[1],
-			weather : data['weather'+ i]
+			tempMin:min,
+			tempMax:max,
+			weather : data['weather'+ i],
+			weatherEn : getWeatherEnName(data['weather'+ i])
 		});
 	}
 	todayWeatherData.tempMin = weatherTrendData[0].tempMin;
 	todayWeatherData.tempMax = weatherTrendData[0].tempMax;
 	todayWeatherData.weather = weatherTrendData[0].weather;
-	if(todayWeatherData.weather == "晴" || todayWeatherData.weather == "多云转晴"){
-		todayWeatherData.weatherEn = 'sunny';
-	}else if(todayWeatherData.weather == "多云" || todayWeatherData.weather == "阴" || todayWeatherData.weather.indexOf('阴') > 0){
-		todayWeatherData.weatherEn = 'cloudy';
-	}else{
-		todayWeatherData.weatherEn = 'rainy';
-	}
+	todayWeatherData.weatherEn = weatherTrendData[0].weatherEn;
+	
 	todayWeatherData.wind = data.wind1;
 	todayWeatherData.sugg = data.index_d;//建议
 
@@ -64,6 +67,18 @@ function proccessWeatherData(data){
 		today : todayWeatherData,
 		trend : weatherTrendData
 	}	
+}
+
+function getWeatherEnName(cnName){
+	var enName = 'sunny';
+	if(cnName == "晴" || cnName.indexOf('晴') > 0){
+		enName = 'sunny';
+	}else if(cnName == "多云" || cnName == "阴" || cnName.indexOf('多云') > 0){
+		enName = 'cloudy';
+	}else{
+		enName = 'rainy';
+	}
+	return enName;
 }
 getWeatherReport('suzhou');
 
