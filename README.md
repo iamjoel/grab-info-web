@@ -14,9 +14,6 @@ web项目的后端使用nodejs，以及web框架express。当显示的信息需�
  * node app
  * 在浏览器中访问 http://127.0.0.1:8001/
 
-## 项目依赖
-* [nodejs](http://nodejs.org/)
-* web后台用
 ## 已完成的模块
 * 天气预报web
 功能：显示今天的天气，以及最近六天的天气趋势。
