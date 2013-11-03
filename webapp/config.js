@@ -3,12 +3,9 @@ var config = {
     userRoutes:{    //用户显示页面
         index:'/'    
     },
-    apiRoutes:{
-    	weatherReport:'/api/weatherReport/:cityName'
-    },
     adminRoutes:{ //管理页面    
     },
-    showModules:['weatherReport','constellation'],//显示的module
+    showModules:['weatherReport','constellation','restaurantRank'],//显示的module
 
   
 };

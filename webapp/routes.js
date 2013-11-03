@@ -6,6 +6,7 @@ var config = require('./config'),
    
 
 module.exports = function(app){
+    //网站首页
     app.get(config.userRoutes.index,indexPage.render);
     //modules api 异步接口
     showModules.forEach(function(moduleName){
