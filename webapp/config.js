@@ -8,7 +8,7 @@ var config = {
     },
     adminRoutes:{ //管理页面    
     },
-    showModules:['weatherReport'],//显示的module
+    showModules:['weatherReport','constellation'],//显示的module
 
   
 };

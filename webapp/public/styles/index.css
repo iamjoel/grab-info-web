@@ -7,3 +7,7 @@ body .nav-tabs li:first{
 body .tab-pane{
 	padding: 20px;
 }
+.panel-body{
+	height: 560px;
+	overflow-y:auto; 
+}
