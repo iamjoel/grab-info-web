@@ -16,9 +16,11 @@ app.configure(function(){
     app.engine('.html', require('ejs').__express);
     app.set('view engine', 'html');  //配置模板解析引擎
 
-    app.use(express.bodyParser());
+    //以下两行 与app.use(express.bodyParser());  https://github.com/senchalabs/connect/wiki/Connect-3.0
+    app.use(express.urlencoded());
+    app.use(express.json());
+    
     app.use(express.methodOverride()); //伪装PUT,DELETE请求
-
 
     //全局错误处理，不让服务器停掉
     app.use(function(err, req, res, next){
