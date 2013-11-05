@@ -1,9 +1,8 @@
-
-var express = require("express"),
-    app = express(),
-    partials = require('express-partials'),
-    routes = require('./routes'),
-    config = require('./config');
+var express = require('express');
+var app = express();
+var partials = require('express-partials');
+var routes = require('./routes');
+var config = require('./config');
 
 
 app.configure(function(){
@@ -35,20 +34,20 @@ app.configure(function(){
 // 定义开发环境
 app.configure('development', function(){
     //静态服务器
-    app.use("/public", express.static(__dirname + '/public'));
+    app.use('/public', express.static(__dirname + '/public'));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 // 定义生产环境
 app.configure('production', function(){
     var oneYear = 31557600000;
-    app.use("/public", express.static(__dirname + '/public',{ maxAge: oneYear }));
+    app.use('/public', express.static(__dirname + '/public',{ maxAge: oneYear }));
     app.use(express.errorHandler());
 });
 
 routes(app);
 app.listen(config.port,function(){
-  console.log("server start listen " + config.port);  
+  console.log('server start listen ' + config.port);  
 });
 
 

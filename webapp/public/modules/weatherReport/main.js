@@ -6,24 +6,24 @@ define(function(require){
 	require('/public/scripts/jquery.flot'); //chat插件
 	require('/public/scripts/jquery.flot.time'); //chat的x轴显示时间，否则只能显示数字
 
-	var tpl = require('/public/modules/weatherReport/main.html#'),
-		panelBody;
+	var tpl = require('/public/modules/weatherReport/main.html#');
+	var	panelBody;
 	panelBody = _.template(tpl);
 	$('#weatherReport .panel-body').html(panelBody);
 
 	var	todayWeatherTemp = require('/public/modules/weatherReport/todayWeather.html#');
 
 	
-	var cityName = 'suzhou',
-		$todayWeatherCont = $('#todayWeather'),
-		minTempChartData = [],
-		maxTempChartData = [],
-		weatherTrendArr = [],
-		weatherTrendData = [],
-		now = moment(),
-		time = now.startOf('day');
+	var cityName = 'suzhou';
+	var	$todayWeatherCont = $('#todayWeather');
+	var	minTempChartData = [];
+	var	maxTempChartData = [];
+	var	weatherTrendArr = [];
+	var	weatherTrendData = [];
+	var	now = moment();
+	var	time = now.startOf('day');
 
-	$("[href=#weatherTrendWrap]").click(function(){
+	$('[href=#weatherTrendWrap]').click(function(){
 		var $this = $(this); 
 		if(minTempChartData.length > 0 && !$this.data('hasInit')){
 			$('#weatherTrend').height(460).width(570);
@@ -52,7 +52,7 @@ define(function(require){
 			});
 				
 		}else{
-			$("#weatherTrend").html('服务器端错误，请刷新页面重试！');
+			$('#weatherTrend').html('服务器端错误，请刷新页面重试！');
 		}
 	}).always(function(){
 		$('#weatherReport .panel-body').unblock();
@@ -60,24 +60,24 @@ define(function(require){
 
 	function getIconClass(weatherName){
 		var map = {
-				sunny :'wi-day-sunny',
-				cloudy :'wi-day-cloudy',
-				rainy :'wi-rain-mix'
+				sunny :'wi-day-sunny'
+				,cloudy :'wi-day-cloudy'
+				,rainy :'wi-rain-mix'
 			},
 			iconClass = map[weatherName] || 'wi-day-sunny';
 		return iconClass;
 	};
 	function initTempTrend(minTemp,maxTemp){
-		var $weatherTrendWrap = $("#weatherTrend"),
+		var $weatherTrendWrap = $('#weatherTrend'),
 			now = moment();
 		$weatherTrendWrap.empty()
-		var plot = $.plot("#weatherTrend", [
-				{ data: minTemp, label: "最低温度"},
-				{ data: maxTemp, label: "最高温度"}
+		var plot = $.plot('#weatherTrend', [
+				{ data: minTemp, label: '最低温度'}
+				,{ data: maxTemp, label: '最高温度'}
 				
 			], {
 				xaxis: {
-				 mode: "time" ,
+				 mode: 'time' ,
 				 timezone:'browser',
 				 tickFormatter:function(date,axix){
 				 	date = moment(date);
@@ -89,7 +89,7 @@ define(function(require){
 				 		return date.format('MM月DD日') + '(' +  weekDay + ')';
 				 	}
 				 },
-				 minTickSize: [1, "day"]
+				 minTickSize: [1, 'day']
 
 				},
 		 
@@ -109,8 +109,8 @@ define(function(require){
 		}); 
 
 		//天气趋势的图表
-		var plotData = plot.getData(),
-			chartOffset = $weatherTrendWrap.offset();
+		var plotData = plot.getData();
+		var	chartOffset = $weatherTrendWrap.offset();
 		plotData.forEach(function(each){
 			if(each.label == '最高温度'){
 				var offset,icon;
@@ -140,7 +140,7 @@ define(function(require){
 			}).appendTo($weatherTrendWrap);
 		};
 
-		console.log(plot.getData())
+		// console.log(plot.getData())
 
 		$weatherTrendWrap.on('plothover',function(event, pos, data){
 			if(data){
@@ -152,14 +152,14 @@ define(function(require){
 		})
 
 		function showTooltip(x, y, contents) {
-			$("#weatherTip").remove();
-			$("<div id='weatherTip'>" + contents + "</div>").css({
+			$('#weatherTip').remove();
+			$('<div id="weatherTip">' + contents + '</div>').css({
 				top: y + 5,
 				left: x + 5,
-			}).appendTo("body").fadeIn(200);
+			}).appendTo('body').fadeIn(200);
 		} 
 		function hideTooltip(){
-			$("#weatherTip").remove();
+			$('#weatherTip').remove();
 		}
 
 	}

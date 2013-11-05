@@ -1,8 +1,8 @@
-var config = require('./config'),
-    indexPage = require('./controllers/index'),
-    showModules = config.showModules,
-    modulePath = './modules',
-    _ = require('lodash');
+var config = require('./config');
+var indexPage = require('./controllers/index');
+var showModules = config.showModules;
+var modulePath = './modules';
+var _ = require('lodash');
    
 
 module.exports = function(app){
