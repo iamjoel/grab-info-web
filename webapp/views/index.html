@@ -1,7 +1,7 @@
 <% modules.forEach(function(module){ %>
 <div class="<%= module.width %>" id = "<%= module.id %>">
-  <div class="panel panel-default">
-      <div class="panel-heading"><%= module.name %></div>
+  <div class="panel panel-info">
+      <div class="panel-heading"><%= module.name %><a class = "pull-right" href = "javascript:void(0);"><i class = "glyphicon glyphicon-refresh"></i></a></div>
       <div class="panel-body"><!--有js来渲染 --></div>
   </div>
 </div>
