@@ -31,6 +31,10 @@ web项目的后端使用nodejs，以及web框架express。当显示的信息需�
 ![天气趋势](http://img.hb.aicdn.com/d432480f00b19adb062f0186a6d4b80481800e27acd8-8l2AJk_fw580)    
 若如上图片不能打开，请点击 [今天天气](http://img.hb.aicdn.com/480c245ffe6175d0722c3228a7b3ad062f9756119b12-01lm42_fw580)和 [天气趋势](http://img.hb.aicdn.com/d432480f00b19adb062f0186a6d4b80481800e27acd8-8l2AJk_fw580)查看
 
+## <a name="projectStyle">项目编码规范</a>
+* [javascript书写规范](https://github.com/iamjoel/grabInfo/wiki/javascript-style)
+* [css 命名规范](https://github.com/iamjoel/grabInfo/wiki/css-classname-guide)
+
 
 
 
