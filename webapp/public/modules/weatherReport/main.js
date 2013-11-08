@@ -10,128 +10,194 @@ define(function(require){
 	var	panelBody;
 	panelBody = _.template(tpl);
 	$('#weatherReport .panel-body').html(panelBody);
-
-	var	todayWeatherTemp = require('/public/modules/weatherReport/todayWeather.html#');
-
 	
+	var $root = $('#weatherReport');
 	var cityName = 'suzhou';
 	var	$todayWeatherCont = $('#todayWeather');
-	var	minTempChartData = [];
-	var	maxTempChartData = [];
-	var	weatherTrendArr = [];
-	var	weatherTrendData = [];
 	var	now = moment();
-	var	time = now.startOf('day');
 
-	$('[href=#weatherTrendWrap]').click(function(){
-		var $this = $(this); 
-		if(minTempChartData.length > 0 && !$this.data('hasInit')){
-			$('#weatherTrend').height(460).width(570);
-			setTimeout(function(){
-				initTempTrend(minTempChartData,maxTempChartData);//
-				$this.data('hasInit',true);
-			},10);
-			
-		}
-	});	
-	$.ajax({
-		url:'/api/weatherReport/'+ cityName,
-		dateType:'json'
-	}).done(function(data){
-		if(data.code == 1){
-			data.data.today.icon = getIconClass(data.data.today.weatherEn);
-			$todayWeatherCont.html(_.template(todayWeatherTemp,data.data.today));
-			var trendData = data.data.trend;
-			weatherTrendData = trendData;
-			var axisTime = moment(time);
-			_.each(trendData,function(each,index){
-				maxTempChartData.push([axisTime.valueOf(),each.tempMax]);
-				minTempChartData.push([axisTime.valueOf(),each.tempMin]);
-				weatherTrendArr.push(each.weather);
-				axisTime.add(1,'d');
-			});
-				
-		}else{
-			$('#weatherTrend').html('服务器端错误，请刷新页面重试！');
-		}
-	}).always(function(){
-		$('#weatherReport .panel-body').unblock();
+	var todayWeatherData;
+	var weatherTrendData;
+	var currentTab = 'todayWeather';
+
+	getWeatherData(cityName,function(){
+		renderTodayWeatherReport(todayWeatherData);
 	});
+	registerEvent();
 
-	function getIconClass(weatherName){
-		var map = {
-				sunny :'wi-day-sunny'
-				,cloudy :'wi-day-cloudy'
-				,rainy :'wi-rain-mix'
-			},
-			iconClass = map[weatherName] || 'wi-day-sunny';
-		return iconClass;
-	};
-	function initTempTrend(minTemp,maxTemp){
-		var $weatherTrendWrap = $('#weatherTrend'),
-			now = moment();
-		$weatherTrendWrap.empty()
-		var plot = $.plot('#weatherTrend', [
-				{ data: minTemp, label: '最低温度'}
-				,{ data: maxTemp, label: '最高温度'}
-				
-			], {
-				xaxis: {
-				 mode: 'time' ,
-				 timezone:'browser',
-				 tickFormatter:function(date,axix){
-				 	date = moment(date);
-				 	var weekMap = ['周日','周一','周二','周三','周四','周五','周六']
-				 	weekDay = weekMap[date.day()];
-				 	if(now.isSame(date,'day')){
-				 		return '今天' + '(' +  weekDay + ')';
-				 	}else{
-				 		return date.format('MM月DD日') + '(' +  weekDay + ')';
-				 	}
-				 },
-				 minTickSize: [1, 'day']
+	
+	function registerEvent(){
 
-				},
-		 
-				
-				series: {
-					lines: {
-						show: true
-					},
-					points: {
-						show: true
-					}
-				},
-				grid: {
-					hoverable: true,
-					clickable: true
-				}
-		}); 
-
-		//天气趋势的图表
-		var plotData = plot.getData();
-		var	chartOffset = $weatherTrendWrap.offset();
-		plotData.forEach(function(each){
-			if(each.label == '最高温度'){
-				var offset,icon;
-				// 拿所有点的坐标
-				each.data.forEach(function(point,index){
-					offset = 
-						plot.pointOffset({
-							x:point[0],
-							y:point[1]
-						});
-					if(index == 0){
-						offset.left += 25;
-					}else if(index == each.data.length - 1){
-						offset.left-= 30;
-					}
-
-					icon = getIconClass(weatherTrendData[index].weatherEn);
-					addWeatherIcon(icon,offset.left ,offset.top );
-				});
-			}
+		$('[href=#todayWeather]',$root).click(function(){
+			currentTab = 'todayWeather';
+			renderTodayWeatherReport(todayWeatherData);
 		});
+
+		$('[href=#weatherTrendWrap]',$root).click(function(){
+			currentTab = 'weatherTrend';
+			var $this = $(this); 
+			if(!$this.data('hasInit')){
+				setTimeout(function(){
+					renderWeatherTrendReport(weatherTrendData);
+					$this.data('hasInit',true);
+				},10);
+				
+			}
+		});	
+
+		$('.refreshBtn',$root).click(function(){
+			getWeatherData(cityName, function(data){
+				if(currentTab == 'todayWeather'){
+					renderTodayWeatherReport(todayWeatherData);
+				}else{
+					renderWeatherTrendReport(weatherTrendData);
+				}
+			});
+		});
+
+
+	};
+	function getWeatherData(cityName, callback){
+		$.ajax({
+			url:'/api/weatherReport/'+ cityName,
+			dateType:'json'
+		}).done(function(data){
+			todayWeatherData = false;
+			weatherTrendData = false;
+
+			if(data.code == 1){
+				data.data.today.icon = getIconClass(data.data.today.weatherEn);
+				todayWeatherData = data.data.today;
+
+				weatherTrendData = formatWeatherTrendData(data.data.trend);
+			}
+
+			if(callback && _.isFunction(callback)){
+				callback();
+			}
+
+		}).always(function(){
+			$('.panel-body',$root).unblock();
+		});
+
+	};
+
+	function renderTodayWeatherReport(data){
+		if(data){
+			var	todayWeatherTemp = require('/public/modules/weatherReport/todayWeather.html#');
+			$todayWeatherCont.html(_.template(todayWeatherTemp,data));
+		}else{
+			//错误信息
+		}
+
+		
+	};
+	
+	function formatWeatherTrendData(data){
+		var formattedData;
+		var minArr = [];
+		var maxArr = [];
+		var weatherEnArr = [];
+		var weatherTrendArr = [];
+		var	time = now.startOf('day');
+		var axisTime = time.clone();
+		_.each(data,function(each,index){
+			var min = Number(each.tempMin);
+			var max = Number(each.tempMax);
+			var temp;
+			// 接口有时返回的 tempMin > tempMax...
+			if(min > max){
+				temp = min;
+				min = max;
+				max = temp;
+			}
+
+			minArr.push([axisTime.valueOf(),min]);
+			maxArr.push([axisTime.valueOf(),max]);
+			weatherEnArr.push(each.weatherEn);
+			weatherTrendArr.push(each.weather);
+			axisTime.add(1,'d');
+		});
+		formattedData = {
+			minArr : minArr
+			, maxArr : maxArr
+			, weatherEnArr : weatherEnArr
+			, weatherTrendArr : weatherTrendArr
+		}
+		return formattedData;
+	};
+	function renderWeatherTrendReport(data){
+		var $weatherTrendWrap = $('#weatherTrend');
+		var	now = moment();
+
+		$weatherTrendWrap.empty();
+		if(data){
+			$('#weatherTrend').height(460).width(570);
+				var weekMap = ['周日','周一','周二','周三','周四','周五','周六']
+				var plot = $.plot('#weatherTrend', [
+						{ data : data.minArr, label: '最低温度'}
+						, { data : data.maxArr, label: '最高温度'}
+					], {
+						xaxis: {
+						 mode: 'time' ,
+						 timezone:'browser',
+						 tickFormatter:function(date,axix){
+						 	date = moment(date);
+						 	weekDay = weekMap[date.day()];
+						 	if(now.isSame(date,'day')){
+						 		return '今天' + '(' +  weekDay + ')';
+						 	}else{
+						 		return date.format('MM月DD日') + '(' +  weekDay + ')';
+						 	}
+						 },
+						 minTickSize: [1, 'day']
+
+						},
+				 
+						
+						series: {
+							lines: {
+								show: true
+							},
+							points: {
+								show: true
+							}
+						},
+						grid: {
+							hoverable: true,
+							clickable: true
+						}
+				}); 
+
+				//天气趋势的天气图标
+				var plotData = plot.getData();
+				var	chartOffset = $weatherTrendWrap.offset();
+				plotData.forEach(function(each){
+					if(each.label == '最高温度'){
+						var offset,icon;
+						// 拿所有点的坐标
+						each.data.forEach(function(point,index){
+							offset = 
+								plot.pointOffset({
+									x:point[0],
+									y:point[1]
+								});
+							if(index == 0){
+								offset.left += 25;
+							}else if(index == each.data.length - 1){
+								offset.left -= 30;
+							}
+
+							icon = getIconClass(data.weatherEnArr[index]);
+							addWeatherIcon(icon,offset.left ,offset.top );
+						});
+					}
+				});
+		}else{
+
+		}
+
+	 
 
 		function addWeatherIcon(icon,x,y){
 			$('<div class="weatherTrendIcon '+ icon +'" ></div>').css({
@@ -161,8 +227,17 @@ define(function(require){
 		function hideTooltip(){
 			$('#weatherTip').remove();
 		}
+	};
 
-	}
+	function getIconClass(weatherName){
+		var map = {
+				sunny :'wi-day-sunny'
+				,cloudy :'wi-day-cloudy'
+				,rainy :'wi-rain-mix'
+			},
+			iconClass = map[weatherName] || 'wi-day-sunny';
+		return iconClass;
+	};
 
 
 })

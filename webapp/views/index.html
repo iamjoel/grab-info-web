@@ -1,7 +1,7 @@
 <% modules.forEach(function(module){ %>
 <div class="<%= module.width %>" id = "<%= module.id %>">
   <div class="panel panel-info">
-      <div class="panel-heading"><%= module.name %><a class = "pull-right" href = "javascript:void(0);"><i class = "glyphicon glyphicon-refresh"></i></a></div>
+      <div class="panel-heading"><%= module.name %><a class = "pull-right refreshBtn" href = "javascript:void(0);"><i class = "glyphicon glyphicon-refresh"></i></a></div>
       <div class="panel-body"><!--有js来渲染 --></div>
   </div>
 </div>
@@ -16,6 +16,12 @@
         seajs.use(scriptsArr,function(){
             $('.panel-body').block({
                  message: null
+            });
+            $('.panel-heading .refreshBtn').click(function(){
+                var $panelBody = $(this).closest('.panel').find('.panel-body');
+                $panelBody.block({
+                   message: null
+              });
             });
         });
    });
