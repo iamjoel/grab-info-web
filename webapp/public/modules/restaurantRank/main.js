@@ -28,6 +28,7 @@ define(function(require){
 
 			if(callback && _.isFunction(callback)){
 				callback();
+				$('.scrollWrap',$root).perfectScrollbar({wheelPropagation: false});
 			}
 		}).always(function(){
 			$('.panel-body', $root).unblock();

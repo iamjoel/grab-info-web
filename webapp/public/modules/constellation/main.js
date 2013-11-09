@@ -6,7 +6,7 @@ define(function(require){
     var mainTpl  = require('/public/modules/constellation/main.html#');
 
     $('.panel-body',$root).html(mainTpl);
-    
+
     getConstellationData(function(data){
         renderRestaurantRankData(data);
     });
@@ -18,6 +18,7 @@ define(function(require){
     });
     
     function getConstellationData(callback){
+        var loadNum = 0;
         for(var i = 0; i < 12; i++){
             $.ajax({
                 url:'http://api.uihoo.com/astro/astro.http.php'
@@ -28,9 +29,13 @@ define(function(require){
                 }
                 ,dataType:'jsonp'
             }).done(function(data){
+                loadNum ++;
                 data = formatConstellationData(data);
                 if(callback && _.isFunction(callback)){
                     callback(data);
+                }
+                if(loadNum == 12){
+                    $('.scrollWrap',$root).perfectScrollbar();
                 }
             }).always(function(){
                 $('.panel-body', $root).unblock();

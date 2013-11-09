@@ -1,5 +1,5 @@
 <% modules.forEach(function(module){ %>
-<div class="<%= module.width %>" id = "<%= module.id %>">
+<div class="<%= module.width %> blockItem" id = "<%= module.id %>">
   <div class="panel panel-info">
       <div class="panel-heading"><%= module.name %><a class = "pull-right refreshBtn" href = "javascript:void(0);"><i class = "glyphicon glyphicon-refresh"></i></a></div>
       <div class="panel-body"><!--有js来渲染 --></div>
@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
    $(function() {
-        var scriptsArr = ['/public/scripts/jquery.blockUI.js'];
+        var scriptsArr = ['/public/scripts/jquery.blockUI','/public/scripts/perfect-scrollbar.with-mousewheel.min','/public/styles/perfect-scrollbar.min.css'];
         <% modules.forEach(function(module){ %>
             scriptsArr.push('<%= "/public/modules/" + module.id + "/main.js" %>');
         <% }); %>
@@ -17,11 +17,12 @@
             $('.panel-body').block({
                  message: null
             });
+
             $('.panel-heading .refreshBtn').click(function(){
                 var $panelBody = $(this).closest('.panel').find('.panel-body');
                 $panelBody.block({
                    message: null
-              });
+                });
             });
         });
    });
