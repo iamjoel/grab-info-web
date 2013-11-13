@@ -10,6 +10,8 @@ app.configure(function(){
     // app.use(express.cookieParser('123'));
     // app.use(express.session());
 //    app.use(express.cookieSession());
+    app.use(express.compress());//gzip / deflate。放在前面来保证后面的内容被压缩
+
     app.use(partials());          //使用  partials，为了使用 layout express 3.X不支持 ejs的layout
     app.set('views', __dirname + '/views'); //设置模板路径，比如index.jade
     app.engine('.html', require('ejs').__express);
@@ -20,6 +22,7 @@ app.configure(function(){
     app.use(express.json());
     
     app.use(express.methodOverride()); //伪装PUT,DELETE请求
+
 
     //全局错误处理，不让服务器停掉
     app.use(function(err, req, res, next){
