@@ -1,12 +1,12 @@
 define(function(require){
-	require('lodash.min');
-	require('moment.min');
-	require('/public/modules/weatherReport/main.css');
+	require('lib/lodash.min');
+	require('lib/moment.min');
+	require('weatherReport/main.css');
 	require('/public/styles/weather-icons/css/weather-icons.min.css');
-	require('/public/scripts/jquery.flot'); //chat插件
-	require('/public/scripts/jquery.flot.time'); //chat的x轴显示时间，否则只能显示数字
+	require('scripts/jquery.flot'); //chat插件
+	require('scripts/jquery.flot.time'); //chat的x轴显示时间，否则只能显示数字
 
-	var tpl = require('/public/modules/weatherReport/main.html#');
+	var tpl = require('weatherReport/main.html#');
 	var	panelBody;
 	panelBody = _.template(tpl);
 	$('#weatherReport .panel-body').html(panelBody);
@@ -59,7 +59,7 @@ define(function(require){
 	};
 	function getWeatherData(cityName, callback){
 		$.ajax({
-			url:'/api/weatherReport/'+ cityName,
+			url:URL.weather+ cityName,
 			dateType:'json'
 		}).done(function(data){
 			todayWeatherData = false;
@@ -84,7 +84,7 @@ define(function(require){
 
 	function renderTodayWeatherReport(data){
 		if(data){
-			var	todayWeatherTemp = require('/public/modules/weatherReport/todayWeather.html#');
+			var	todayWeatherTemp = require('weatherReport/todayWeather.html#');
 			$todayWeatherCont.html(_.template(todayWeatherTemp,data));
 		}else{
 			//错误信息

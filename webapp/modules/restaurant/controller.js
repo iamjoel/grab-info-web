@@ -1,10 +1,10 @@
 var service = require('./service');
-function getRestaurantRank(req,res){
+function rank(req,res){
 	service.getRestaurantRank(function(data){
 		res.send(data);
 	});
 };
 
 module.exports = {
-	restaurantRank:getRestaurantRank
+	rank:rank
 };

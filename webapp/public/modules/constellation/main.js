@@ -1,9 +1,9 @@
 define(function(require){
-    require('lodash.min');
-    require('/public/modules/constellation/main.css');
+    require('lib/lodash.min');
+    require('constellation/main.css');
 
     var $root = $('#constellation');
-    var mainTpl  = require('/public/modules/constellation/main.html#');
+    var mainTpl  = require('constellation/main.html#');
 
     $('.panel-body',$root).html(mainTpl);
 
@@ -21,7 +21,7 @@ define(function(require){
         var loadNum = 0;
         for(var i = 0; i < 12; i++){
             $.ajax({
-                url:'http://api.uihoo.com/astro/astro.http.php'
+                url:URL.constellation
                 ,data:{
                     fun : 'day'
                     ,id : i
@@ -44,7 +44,7 @@ define(function(require){
     };
 
     function renderRestaurantRankData(data){
-        var itemTpl = require('/public/modules/constellation/item.html#');
+        var itemTpl = require('constellation/item.html#');
         var $wrap = $('#constellationWrap');
 
         if(data){

@@ -5,7 +5,7 @@ var config = {
     }
     , adminRoutes:{ //管理页面    
     }
-    , showModules:['weatherReport','constellation','restaurantRank'],//显示的module
+    , showModules:['weather','constellation','restaurant'],//显示的module
 
   
 };

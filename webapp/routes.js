@@ -1,22 +1,18 @@
 var config = require('./config');
 var indexPage = require('./controllers/index');
-var showModules = config.showModules;
-var modulePath = './modules';
 var _ = require('lodash');
    
 
 module.exports = function(app){
     //网站首页
     app.get(config.userRoutes.index,indexPage.render);
-    //modules api 异步接口
-    showModules.forEach(function(moduleName){
-        var eachModuleConfig = require([modulePath,moduleName,'config'].join('/'));
-        if(eachModuleConfig.api && _.isArray(eachModuleConfig.api)){
-            eachModuleConfig.api.forEach(function(api){
-                app.get(api.path,require([modulePath,moduleName,'controller'].join('/'))[api.name])
-            })
-        }
-    })
+    
+    // RESTFul url  参考 www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api?utm_source=hackernewsletter&utm_medium=email
+    var weatherController = require('./modules/weather/controller');
+    app.get('/api/weather/:cityName',weatherController.list);
+
+    var restaurantController = require('./modules/restaurant/controller');
+    app.get('/api/restaurant/:cityName',restaurantController.rank);//喜爱程度从高到低
  
 
     //404页面

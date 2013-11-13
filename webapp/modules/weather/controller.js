@@ -1,5 +1,5 @@
 var service = require('./service');
-function weatherReport(req,res){
+function list(req,res){
 	var cityCode = req.params.cityName;
 	service.getWeatherReport(cityCode,function(data){
 		res.send(data);
@@ -7,5 +7,5 @@ function weatherReport(req,res){
 };
 
 module.exports = {
-	weatherReport:weatherReport
+	list:list
 };

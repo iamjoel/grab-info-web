@@ -1,5 +1,5 @@
 define(function(require){
-	var tpl = require('/public/modules/restaurantRank/main.html#');
+	var tpl = require('restaurantRank/main.html#');
 	$('#restaurantRank .panel-body').html(tpl);
 
 	var $root = $('#restaurantRank');
@@ -17,7 +17,7 @@ define(function(require){
 
 	function getRestaurantRankData(callback){
 		$.ajax({
-			url:'/api/getRestaurantRank/'
+			url:URL.restaurant
 			,dateType:'json'
 		}).done(function(data){
 			if(data.code == 1){
@@ -36,7 +36,7 @@ define(function(require){
 	};
 
 	function renderRestaurantRankData(data){
-		var	itemTemp = require('/public/modules/restaurantRank/item.html#');
+		var	itemTemp = require('restaurantRank/item.html#');
 		var	$contWrap = $('.panel-body tbody',$root);
 		if(data){
 			data.forEach(function(each){
