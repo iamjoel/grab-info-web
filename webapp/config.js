@@ -1,5 +1,5 @@
 var config = {
-    port:8001
+    port:3000
     , userRoutes:{    //用户显示页面
         index:'/'    
     }
