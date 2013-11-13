@@ -7,24 +7,25 @@
 </div>
 <% }); %>
 
-
-
 <script type="text/javascript">
+    var LOADING_CONFIG = {
+         message: '<img src="/public/images/loading.gif" />'
+         ,css:{
+          background:'none',
+          border:'none'
+         }
+    }
    $(function() {
         var scriptsArr = ['/public/scripts/jquery.blockUI','/public/scripts/perfect-scrollbar.with-mousewheel.min','/public/styles/perfect-scrollbar.min.css'];
         <% modules.forEach(function(module){ %>
             scriptsArr.push('<%= "/public/modules/" + module.id + "/main.js" %>');
         <% }); %>
         seajs.use(scriptsArr,function(){
-            $('.panel-body').block({
-                 message: null
-            });
+            $('.panel-body').block(LOADING_CONFIG);
 
             $('.panel-heading .refreshBtn').click(function(){
                 var $panelBody = $(this).closest('.panel').find('.panel-body');
-                $panelBody.block({
-                   message: null
-                });
+                $panelBody.block(LOADING_CONFIG);
             });
         });
    });
