@@ -27,7 +27,7 @@ app.configure(function(){
     //全局错误处理，不让服务器停掉
     app.use(function(err, req, res, next){
         console.error(err.stack);
-        res.send(500, 'Something broke!');
+        res.send(500, { error: 'something error happen' });
     });
 
 
@@ -47,11 +47,17 @@ app.configure('production', function(){
     app.use('/public', express.static(__dirname + '/public',{ maxAge: oneYear }));
     app.use(express.errorHandler());
 });
-
+// app.get('/e',function(){
+//     process.exit();//测试守护进程
+// });
 routes(app);
+
 app.listen(config.port,function(){
-  console.log('server start listen ' + config.port);  
+  console.log('server start listen ' + config.port); 
 });
+
+
+
 
 
 
