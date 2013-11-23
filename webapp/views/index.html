@@ -1,12 +1,3 @@
-<% modules.forEach(function(module){ %>
-<div class="<%= module.width %> blockItem" id = "<%= module.id %>">
-  <div class="panel panel-info">
-      <div class="panel-heading"><%= module.name %><a class = "pull-right refreshBtn" href = "javascript:void(0);"><i class = "glyphicon glyphicon-refresh"></i></a></div>
-      <div class="panel-body"><!--有js来渲染 --></div>
-  </div>
-</div>
-<% }); %>
-
 <script type="text/javascript">
     var LOADING_CONFIG = {
          message: '<img src="/public/images/loading.gif" />'
@@ -21,14 +12,17 @@
       ,restaurant: '/api/restaurant/suzhou?sort=-love'
     };
    $(function() {
-        var scriptsArr = ['/public/scripts/jquery.blockUI','/public/scripts/perfect-scrollbar.with-mousewheel.min','/public/styles/perfect-scrollbar.min.css'];
+        var resourceArr = [
+        '/public/scripts/jquery.blockUI'
+        ,'/public/scripts/perfect-scrollbar.with-mousewheel.min'
+        ,'/public/styles/perfect-scrollbar.min.css'];
         <% modules.forEach(function(module){ %>
-            scriptsArr.push('<%= "/public/modules/" + module.id + "/main.js" %>');
+            resourceArr.push('<%= "/public/modules/" + module.id + "/main.js" %>');
         <% }); %>
 
         var paths = {
           script : '/public/scripts'
-          ,lib : '/public/scripts/lib'
+          , lib : '/public/scripts/lib'
         };
         <% modules.forEach(function(module){ %>
           paths.<%=module.id %> = '<%= "/public/modules/" + module.id %>';
@@ -39,7 +33,7 @@
           ,paths : paths
           
         });
-        seajs.use(scriptsArr,function(){
+        seajs.use(resourceArr,function(){
             $('.panel-body').block(LOADING_CONFIG);
 
             $('.panel-heading .refreshBtn').click(function(){
@@ -47,6 +41,8 @@
                 $panelBody.block(LOADING_CONFIG);
             });
         });
+
+
    });
 </script>
 

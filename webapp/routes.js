@@ -1,6 +1,7 @@
 var config = require('./config');
 var indexPage = require('./controllers/index');
 var _ = require('lodash');
+var API_PREFIX =  '/api' ;
    
 
 module.exports = function(app){
@@ -8,11 +9,14 @@ module.exports = function(app){
     app.get(config.userRoutes.index,indexPage.render);
     
     // RESTFul url  参考 www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api?utm_source=hackernewsletter&utm_medium=email
+    var moduleControl = require('./controllers/module');
+    app.get(API_PREFIX + '/module', moduleControl.list);
+
     var weatherController = require('./modules/weather/controller');
-    app.get('/api/weather/:cityName',weatherController.list);
+    app.get(API_PREFIX + '/weather/:cityName',weatherController.list);
 
     var restaurantController = require('./modules/restaurant/controller');
-    app.get('/api/restaurant/:cityName',restaurantController.rank);//喜爱程度从高到低
+    app.get(API_PREFIX + '/restaurant/:cityName',restaurantController.rank);//喜爱程度从高到低
  
 
     //404页面
