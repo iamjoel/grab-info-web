@@ -13,7 +13,6 @@ module.exports.list = function(req, res) {
 		res.send({
 			success : SUCCESS_CODE
 			, data : data
-			, total : modules.length
 		});	
 	} catch (err){
 		res.send({

@@ -24,7 +24,7 @@ function getWeatherReport(cityName,callback) {
 				});
 			}catch(e){
 				console.error(e);
-				callback({
+				callback && callback({
 					code:'0',
 					data:url + ': error' 
 				});
@@ -39,7 +39,8 @@ function getWeatherReport(cityName,callback) {
 function proccessWeatherData(data){
 	var todayWeatherData = {},
 		weatherTrendData = [],
-		minAndMaxReg = /(\d+)℃~(\d+)℃/;
+		minAndMaxReg = /(-?\d+)℃~(-?\d+)℃/;
+
 	for(var i = 1,len = 6; i <= len; i++){
 		var min = minAndMaxReg.exec(data['temp'+ i])[1],
 			max = minAndMaxReg.exec(data['temp'+ i])[2];
