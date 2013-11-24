@@ -1,4 +1,5 @@
 define(function(require){
+  	var config = require('script/config');
 	var tpl = require('restaurantRank/main.html#');
 	$('#restaurantRank .panel-body').html(tpl);
 
@@ -17,7 +18,7 @@ define(function(require){
 
 	function getRestaurantRankData(callback){
 		$.ajax({
-			url:URL.restaurant
+			url: config.URL.restaurant
 			,dateType:'json'
 		}).done(function(data){
 			if(data.code == 1){

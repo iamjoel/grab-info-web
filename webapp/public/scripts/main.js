@@ -1,4 +1,6 @@
-$(document).ready(function(){
+define(function(require, exports){
+  var config = require('script/config');
+  console.log(config);
   var Module = Backbone.Model.extend({
     
   });
@@ -17,6 +19,7 @@ $(document).ready(function(){
       return modelData;
     }
   });
+
   var ModelItemView = Backbone.View.extend({
     initialize : function(model){
       this.model = model;
@@ -25,8 +28,15 @@ $(document).ready(function(){
       this.$el.html(_.template(this.template, {
         module : this.model
       }));
+      this.$('.panel-body').block(config.LOADING_CONFIG);
+      this.$('.panel-heading .refreshBtn').click(function(){
+          var $panelBody = $(this).closest('.panel').find('.panel-body');
+          $panelBody.block(config.LOADING_CONFIG);
+      });
+      require.async(_.template(this.jsPath, {id : this.model.get('id')}))
       return this;
     }
+    , jsPath : '/public/modules/<%= id %>/main.js'
     , template : 
       '<div class="<%= module.get(\'width\') %> blockItem" id = "<%= module.get(\'id\') %>">' + 
           '<div class="panel panel-info">' + 
@@ -57,11 +67,11 @@ $(document).ready(function(){
     }
     
   });
-  var modules = new Modules();
-  var view = new ModuleListView(modules);
 
-  modules.fetch().done(function(data){
-    
-  });
+  
+  exports.Modules = Modules;
+  exports.View = ModuleListView;
+  
 });
+
        

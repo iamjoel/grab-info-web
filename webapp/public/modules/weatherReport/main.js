@@ -1,4 +1,5 @@
 define(function(require){
+  	var config = require('script/config');
 	require('lib/lodash.min');
 	require('lib/moment.min');
 	require('weatherReport/main.css');
@@ -59,8 +60,8 @@ define(function(require){
 	};
 	function getWeatherData(cityName, callback){
 		$.ajax({
-			url:URL.weather+ cityName,
-			dateType:'json'
+			url: config.URL.weather+ cityName,
+			dateType: 'json'
 		}).done(function(data){
 			todayWeatherData = false;
 			weatherTrendData = false;

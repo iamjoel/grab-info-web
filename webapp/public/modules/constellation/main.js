@@ -1,4 +1,5 @@
 define(function(require){
+    var config = require('script/config');
     require('lib/lodash.min');
     require('constellation/main.css');
 
@@ -21,13 +22,13 @@ define(function(require){
         var loadNum = 0;
         for(var i = 0; i < 12; i++){
             $.ajax({
-                url:URL.constellation
-                ,data:{
+                url: config.URL.constellation
+                ,data: {
                     fun : 'day'
                     ,id : i
                     ,format : 'jsonp'
                 }
-                ,dataType:'jsonp'
+                ,dataType: 'jsonp'
             }).done(function(data){
                 loadNum ++;
                 data = formatConstellationData(data);

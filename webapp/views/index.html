@@ -1,47 +1,28 @@
 <script type="text/javascript">
-    var LOADING_CONFIG = {
-         message: '<img src="/public/images/loading.gif" />'
-         ,css:{
-          background:'none',
-          border:'none'
-         }
-    };
-    var URL = {
-      weather : '/api/weather/'
-      ,constellation:'http://api.uihoo.com/astro/astro.http.php'
-      ,restaurant: '/api/restaurant/suzhou?sort=-love'
-    };
    $(function() {
-        var resourceArr = [
-        '/public/scripts/jquery.blockUI'
-        ,'/public/scripts/perfect-scrollbar.with-mousewheel.min'
-        ,'/public/styles/perfect-scrollbar.min.css'];
-        <% modules.forEach(function(module){ %>
-            resourceArr.push('<%= "/public/modules/" + module.id + "/main.js" %>');
-        <% }); %>
+    var paths = {
+      script : '/public/scripts'
+      , lib : '/public/scripts/lib'
+    };
 
-        var paths = {
-          script : '/public/scripts'
-          , lib : '/public/scripts/lib'
-        };
-        <% modules.forEach(function(module){ %>
-          paths.<%=module.id %> = '<%= "/public/modules/" + module.id %>';
-        <% }); %>
+    <% modules.forEach(function(module) { %>
+      paths.<%=module.id %> = '<%= "/public/modules/" + module.id %>';
+    <% }); %>
 
-        seajs.config({
-          base : '/public'
-          ,paths : paths
+    seajs.config({
+      base : '/public'
+      ,paths : paths 
+    });
+
+    seajs.use('/public/scripts/main', function(util) {
+      var Modules = util.Modules;
+      var View = util.View;
+      var modules = new Modules();
+      var view = new View(modules);
+      modules.fetch().done(function(data){
           
-        });
-        seajs.use(resourceArr,function(){
-            $('.panel-body').block(LOADING_CONFIG);
-
-            $('.panel-heading .refreshBtn').click(function(){
-                var $panelBody = $(this).closest('.panel').find('.panel-body');
-                $panelBody.block(LOADING_CONFIG);
-            });
-        });
-
+      });
+    });
 
    });
 </script>
