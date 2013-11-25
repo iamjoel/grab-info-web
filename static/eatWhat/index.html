@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<div class="container">
+		
+	</div>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+	<script>
+		$(document).ready(function() {
+			var lists = [];
+			var lunchLists = [
+			'良心套餐'
+			, {
+				name : '香港故事'
+				, weekDay : [2,3]//周二，周三
+			}
+			,'食其家'
+			, '三千粉'
+			, '萨莉亚'
+			, '谷川'
+			];
+			var superLists = [
+			'新之助拉面'
+			, '永和大王'
+			, {
+				name : '赛百味'
+				, only : [4]//周四晚就选它了
+			}
+			];
+			function getFilterList(type) {
+				var list = [];
+				var temp;
+				temp = filter(lists); 
+				list = temp.list;
+				if(type ==  'lunch') {
+					temp = filter(lunchLists); 
+					if (temp.isOnly == false) {
+						list = list.concat(temp.list);
+					}else {
+						list = temp.list;
+					}
+				}else {
+					temp = filter(superLists); 
+					if (temp.isOnly == false) {
+						list = list.concat(temp.list);
+					}else {
+						list = temp.list;
+					}
+				}
+
+				return list;
+			};
+			function filter(list) {
+				var date = new Date().getDay();
+				if(date === 0) {
+					date = 7;
+				}
+				var data = {
+					list : []
+					, isOnly : false
+				};
+
+				list.forEach(function(each) {
+					if(!data.isOnly){
+						if (typeof each == 'object'){
+							if(each.only && (each.only == date || each.only.indexOf(date) > -1)) {
+								data.isOnly = true;
+								data.list = [each.name];
+							} else if(each.weekDay && (each.weekDay == date || each.weekDay.indexOf(date) > -1)) {
+								data.list.push(each.name);
+							}
+						}else {
+							data.list.push(each);
+						}
+					}
+					
+				});
+
+				return data;
+
+			};
+
+			function getRandom(list) {
+				var randNum = 50 + parseInt(50 * Math.random(),10);
+				var i = randNum % list.length;
+				return list[i];
+			};
+			// 还没想到比较好的算法
+			function getWandH(num) {
+				var map = {
+					4 : {
+						w : 2
+						, h : 0
+					}
+					, 6 : {
+						w : 3
+						, h : 0
+					}
+					, 8 : {
+						w : 3
+						, h : 1
+					}
+					, 10 : {
+						w : 4
+						, h : 1
+					}
+					, 12 : {
+						w : 4
+						, h : 2
+					}
+					, 14 : {
+						w : 4
+						, h : 3
+					}
+				}
+				if (num % 2 == 1) {
+					num ++;
+				}
+				return map[num];
+			};
+
+			function makeItem(name) {
+				var $item = $('<div>');
+				$item.addClass('item');
+				$item.text(name);
+				return $item;
+			};
+
+
+
+			function init() {
+				var type = new Date().getHours() < 12 ? 'lunch' : 'super';
+				// var type = 'lunch';
+				var list = getFilterList(type);
+				alert('吃 ' + getRandom(list));
+			};
+
+			init();
+		})
+	</script>
+
+</body>
+</html>
