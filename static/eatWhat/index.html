@@ -10,27 +10,32 @@
 	</div>
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
 	<script>
-		$(document).ready(function() {
-			var lists = [];
-			var lunchLists = [
+		var lists = []; //午餐，晚餐 均可
+		var lunchLists = [  // 仅午餐
 			'良心套餐'
 			, {
 				name : '香港故事'
-				, weekDay : [2,3]//周二，周三
+				, weekDay : [2,3] //周二，周三
 			}
 			,'食其家'
 			, '三千粉'
 			, '萨莉亚'
 			, '谷川'
-			];
-			var superLists = [
+		];
+		var superLists = [ // 仅晚餐餐
 			'新之助拉面'
 			, '永和大王'
 			, {
 				name : '赛百味'
-				, only : [4]//周四晚就选它了
+				, only : [4] //周四晚就选它了
 			}
-			];
+		];
+
+		$(document).ready(function() {
+			var lists = window.lists;
+			var lunchLists = window.lunchLists;
+			var superLists = window.superLists;
+
 			function getFilterList(type) {
 				var list = [];
 				var temp;
