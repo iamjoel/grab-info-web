@@ -31,7 +31,7 @@
 * [css 命名规范](https://github.com/iamjoel/grabInfo-web/wiki/css-classname-guide)
 
 ## 提交bug 
-点 [这里](https://github.com/iamjoel/grabInfo/issues/new)
+点 [这里](https://github.com/iamjoel/grabInfo-web/issues/new)
 
 
 
