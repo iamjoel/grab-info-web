@@ -4,7 +4,9 @@
   "description": "汇集了一些有意思的模块页面",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run predeploy && npm install && node app",
+    "test": "not ok",
+    "predeploy": "echo start deploy app..."
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,6 @@
     "ejs": "~0.8.4",
     "lodash": "~2.2.1",
     "cheerio": "~0.12.3",
-    "nodegrass": "0.0.1"
+    "nodegrass": "~0.0.3"
   }
 }
