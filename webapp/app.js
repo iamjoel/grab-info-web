@@ -3,6 +3,8 @@ var app = express();
 var partials = require('express-partials');
 var routes = require('./routes');
 var config = require('./config');
+var util = require('./util');
+var logger = util.logger;
 
 
 app.configure(function(){
@@ -28,6 +30,7 @@ app.configure(function(){
     app.use(function(err, req, res, next){
         console.error(err.stack);
         res.send(500, { error: 'something error happen' });
+        logger.error('ops! ' + err + '!!!');
     });
 
 
@@ -53,7 +56,7 @@ app.configure('production', function(){
 routes(app);
 
 app.listen(config.port,function(){
-  console.log('server start listen ' + config.port); 
+  logger.info("grabInfo listening on port %d in %s mode", config.port, app.settings.env);//app.settings.env 模式 
 });
 
 

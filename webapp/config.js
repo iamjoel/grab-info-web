@@ -1,5 +1,6 @@
 var config = {
     port:3000
+    , logFilePath : __dirname + '/logs'
     , userRoutes : {    //用户显示页面
         index:'/'    
     }
