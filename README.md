@@ -9,7 +9,7 @@
 * 安装[nodejs](http://nodejs.org/)
 * 下载本项目
 * 安装依赖并运行 
- * cd webapp 
+ * cd 项目根目录 
  * npm start
  * 在浏览器中访问 http://127.0.0.1:3000/
 
@@ -27,8 +27,8 @@
 更多请点击 [这里](http://huaban.com/boards/13744965/)查看
 
 ## <a name="projectStyle">项目编码规范</a>
-* [javascript书写规范](https://github.com/iamjoel/grabInfo/wiki/javascript-style)
-* [css 命名规范](https://github.com/iamjoel/grabInfo/wiki/css-classname-guide)
+* [javascript书写规范](https://github.com/iamjoel/grabInfo-web/wiki/javascript-style)
+* [css 命名规范](https://github.com/iamjoel/grabInfo-web/wiki/css-classname-guide)
 
 ## 提交bug 
 点 [这里](https://github.com/iamjoel/grabInfo/issues/new)

@@ -2,7 +2,7 @@
   "name": "grap-info",
   "version": "0.0.0",
   "description": "汇集了一些有意思的模块页面",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "npm run predeploy && npm install && node app",
     "test": "not ok",
@@ -18,6 +18,9 @@
     "url": "https://github.com/iamjoel/grabInfo/issues"
   },
   "devDependencies": {
+    
+  },
+  "dependencies": {
     "express": "~3.4.2",
     "express-partials": "~0.1.1",
     "ejs": "~0.8.4",
