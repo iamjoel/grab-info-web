@@ -4,7 +4,9 @@ define(function(require){
     require('constellation/main.css');
 
     var $root = $('#constellation');
-    var mainTpl  = require('constellation/main.html#');
+    var tpl = require('constellation/main.html#');
+    $root.append(tpl);
+    var mainTpl  = $('.mainTemp', $root).html();
 
     $('.panel-body',$root).html(mainTpl);
 
@@ -45,7 +47,7 @@ define(function(require){
     };
 
     function renderRestaurantRankData(data){
-        var itemTpl = require('constellation/item.html#');
+        var itemTpl = $('.itemTemp', $root).html();
         var $wrap = $('#constellationWrap');
 
         if(data){

@@ -7,12 +7,13 @@ define(function(require){
 	require('scripts/jquery.flot'); //chat插件
 	require('scripts/jquery.flot.time'); //chat的x轴显示时间，否则只能显示数字
 
+	var $root = $('#weatherReport');
 	var tpl = require('weatherReport/main.html#');
 	var	panelBody;
-	panelBody = _.template(tpl);
+	$root.append(tpl);
+	panelBody = _.template($('.mainTemp', $root).html());
 	$('#weatherReport .panel-body').html(panelBody);
 	
-	var $root = $('#weatherReport');
 	var cityName = 'suzhou';
 	var	$todayWeatherCont = $('#todayWeather');
 	var	now = moment();
@@ -85,7 +86,7 @@ define(function(require){
 
 	function renderTodayWeatherReport(data){
 		if(data){
-			var	todayWeatherTemp = require('weatherReport/todayWeather.html#');
+			var	todayWeatherTemp = $('.todayWeatherTemp', $root).html();
 			$todayWeatherCont.html(_.template(todayWeatherTemp,data));
 		}else{
 			//错误信息

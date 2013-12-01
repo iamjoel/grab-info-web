@@ -1,15 +1,39 @@
+<script type="text/template" class = "mainTemp">
+	<ul class="nav nav-tabs">
+	  <li class = "active"><a href="#todayWeather" data-toggle="tab">今日</a></li>
+	  <li><a href="#weatherTrendWrap" data-toggle="tab">趋势</a></li>
+	</ul>
+	<div class="tab-content padded">
+	  <div class="tab-pane row active" id="todayWeather"></div>
+	  <div class="tab-pane" id="weatherTrendWrap">
+	  	<div id="weatherTrend">加载中...</div>
+	  </div>
 
-<ul class="nav nav-tabs">
-  <li class = "active"><a href="#todayWeather" data-toggle="tab">今日</a></li>
-  <li><a href="#weatherTrendWrap" data-toggle="tab">趋势</a></li>
-</ul>
-<div class="tab-content padded">
-  <div class="tab-pane row active" id="todayWeather"></div>
-  <div class="tab-pane" id="weatherTrendWrap">
-  	<div id="weatherTrend">加载中...</div>
-  </div>
+	</div>	
+</script>
 
-</div>
+<script type="text/template" class = "todayWeatherTemp">
+	<span class = "wetherIcon col-xs-3 "><i class = "<%= icon %>" title = "<%= weather %>"></i></span>
+	<div class="col-xs-9 wetherDetailWrap">
+		<h2 >苏州</h2>
+		<dl class = "row">
+			<dt class = "col-md-4">最低温度</dt>
+			<dd class = "col-md-8"><%= tempMin %>℃</dd>
+		</dl>
+		<dl class = "row">
+			<dt class = "col-md-4">最高温度</dt>
+			<dd class = "col-md-8"><%= tempMax %>℃</dd>
+		</dl>
+		<dl class = "row">
+			<dt class = "col-md-4">风力</dt>
+			<dd class = "col-md-8"><%= wind %></dd>
+		</dl>
+		<div class="row suggWrap">
+			<p><%= sugg %><p>
+		</div>
+	</div>
+</script>
+
 
 
 
