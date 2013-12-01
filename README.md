@@ -1,4 +1,4 @@
-# 格子 [![依赖模块状态](https://david-dm.org/iamjoel/grabInfo.png)](http://david-dm.org/iamjoel/grabInfo)
+# 格子 [![依赖模块状态](https://david-dm.org/iamjoel/grabInfo-web.png)](http://david-dm.org/iamjoel/grabInfo-web)
 格子是提供日常信息的web项目。每种信息都显示在一个格子中。类似igoogle。     
 
 项目的后端使用nodejs，以及web框架express。前端使用bootstrap3来控制网站风格以及响应式；使用[seajs](http://seajs.org/docs/)

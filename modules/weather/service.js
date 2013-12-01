@@ -42,8 +42,8 @@ function proccessWeatherData(data){
 		minAndMaxReg = /(-?\d+)℃~(-?\d+)℃/;
 
 	for(var i = 1,len = 6; i <= len; i++){
-		var min = minAndMaxReg.exec(data['temp'+ i])[1],
-			max = minAndMaxReg.exec(data['temp'+ i])[2];
+		var min = Number(minAndMaxReg.exec(data['temp'+ i])[1]);
+		var	max = Number(minAndMaxReg.exec(data['temp'+ i])[2]);
 		if(min > max){
 			var temp = min;
 			min = max;

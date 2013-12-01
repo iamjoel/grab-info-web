@@ -1,6 +1,5 @@
 define(function(require, exports){
   var config = require('script/config');
-  console.log(config);
   var Module = Backbone.Model.extend({
     
   });

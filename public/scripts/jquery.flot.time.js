@@ -414,9 +414,9 @@ API.txt for details.
 			});
 		});
 	}
-	if(!$.plot.plugins){
-	  $.plot.plugins = [];	
-	}
+	$.plot = $.plot || {};
+	$.plot.plugins = $.plot.plugins || [];
+	
 	$.plot.plugins.push({
 		init: init,
 		options: options,
