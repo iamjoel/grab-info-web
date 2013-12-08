@@ -1,5 +1,5 @@
-var nodegrass = require('nodegrass'),
-	cheerio = require('cheerio');
+var nodegrass = require('nodegrass');
+var cheerio = require('cheerio');
 
 // http://suzhou.xiaomishu.com/top/all.aspx 订餐小秘书
 function getRestaurantRank(callback) {
@@ -13,7 +13,7 @@ function getRestaurantRank(callback) {
 				data: rankData
 			});
 		}catch(e){
-			console.error(e);
+			logger.error(__dirname + ':' + e);
 			callback({
 				code:'0',
 				data:url + ': error' 
@@ -21,6 +21,8 @@ function getRestaurantRank(callback) {
 		}
 		
 
+	}).on('error', function(e) {
+	    logger.error(__dirname + ':' + e);
 	});
 	
 }

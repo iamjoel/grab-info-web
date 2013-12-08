@@ -30,7 +30,7 @@ app.configure(function(){
     app.use(function(err, req, res, next){
         console.error(err.stack);
         res.send(500, { error: 'something error happen' });
-        logger.error('ops! ' + err + '!!!');
+        logger.error('unknow error :' + err);
     });
 
 

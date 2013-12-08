@@ -17,14 +17,26 @@ module.exports = function(app){
 
     var restaurantController = require('./modules/restaurant/controller');
     app.get(API_PREFIX + '/restaurant/:cityName',restaurantController.rank);//喜爱程度从高到低
- 
-
+    
+    app.get(API_PREFIX, function(req, res){
+        res.send({
+            code : 1
+            , msg : 'api path root'
+        })
+    });
+    //api 404页面
+    app.get(API_PREFIX + '/*', function(req,res) {
+        res.send({
+            code : 0
+            , errMsg : 'not support api'
+        });
+    });
     //404页面
     app.get('404',function(req,res){
-        res.render('404')
+        res.render('404');
     });
     app.get('*',function(req,res){
-        res.render('404')
+        res.render('404');
     });
 
 

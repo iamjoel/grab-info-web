@@ -6,7 +6,11 @@ var config = {
     }
     , adminRoutes : { //管理页面    
     }
-    , showModules : ['weather', 'constellation', 'restaurant']//显示的module
+    , showModules : ['weather'
+    	, 'constellation'
+    	, 'restaurant'
+    	// , 'movie'
+    	]//显示的module
     // , apiVersion : '0.1'
   
 };

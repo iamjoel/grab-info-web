@@ -1,3 +1,6 @@
+$.ajaxSetup({
+  timeout : 5000
+});
 define(function(require, exports){
   var config = require('script/config');
   var Module = Backbone.Model.extend({

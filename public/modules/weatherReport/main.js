@@ -61,9 +61,10 @@ define(function(require){
 	};
 	function getWeatherData(cityName, callback){
 		$.ajax({
-			url: config.URL.weather+ cityName,
-			dateType: 'json'
-		}).done(function(data){
+			url: config.URL.weather+ cityName
+			, dateType: 'json'
+		})
+		.done(function(data){
 			todayWeatherData = false;
 			weatherTrendData = false;
 
@@ -78,7 +79,11 @@ define(function(require){
 				callback();
 			}
 
-		}).always(function(){
+		})
+		.fail(function(){
+			$('#todayWeather,#weatherTrendWrap').text('服务器端错误,请稍后重试！');
+		})
+		.always(function(){
 			$('.panel-body',$root).unblock();
 		});
 

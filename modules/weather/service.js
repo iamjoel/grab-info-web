@@ -1,4 +1,6 @@
 var nodegrass = require('nodegrass');
+var util = require('../../util');
+var logger = util.logger; 
 //用中央气象台提供的api,接口参考 http://g.kehou.com/t1029846752.html
 var cityNameCodeMapping = {
 	'suzhou':'101190401'
@@ -23,13 +25,15 @@ function getWeatherReport(cityName,callback) {
 					data: weatherData
 				});
 			}catch(e){
-				console.error(e);
+				logger.error(__dirname + ':' + e);
 				callback && callback({
 					code:'0',
 					data:url + ': error' 
 				});
 			}
 			
+		}).on('error', function(e) {
+		    logger.error(__dirname + ':' + e);
 		});
 	}
 	
@@ -81,7 +85,6 @@ function getWeatherEnName(cnName){
 	}
 	return enName;
 }
-getWeatherReport('suzhou');
 
 module.exports = {
 	'getWeatherReport':getWeatherReport
