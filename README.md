@@ -10,8 +10,10 @@
 * 下载本项目
 * 安装依赖并运行 
  * cd 项目根目录 
- * npm start
+ * npm start。如果要让其能在发生意外时，仍能持续运行，可使用 npm install。然后 forever start app.js。
  * 在浏览器中访问 http://127.0.0.1:3000/
+
+
 
 ## 已完成的模块
 * 天气预报web

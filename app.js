@@ -33,6 +33,10 @@ app.configure(function(){
         logger.error('unknow error :' + err);
     });
 
+    process.on('exit', function() {
+      logger.error('node exit!!!');
+    });
+
 
 });
 
