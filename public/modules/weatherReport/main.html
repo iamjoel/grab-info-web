@@ -2,11 +2,15 @@
 	<ul class="nav nav-tabs">
 	  <li class = "active"><a href="#todayWeather" data-toggle="tab">今日</a></li>
 	  <li><a href="#weatherTrendWrap" data-toggle="tab">趋势</a></li>
+	  <li><a href="#PM25Wrap" data-toggle="tab">PM2.5</a></li>
 	</ul>
 	<div class="tab-content padded">
 	  <div class="tab-pane row active" id="todayWeather"></div>
 	  <div class="tab-pane" id="weatherTrendWrap">
 	  	<div id="weatherTrend">加载中...</div>
+	  </div>
+	  <div class="tab-pane" id="PM25Wrap">
+	  	<div id="PM25">加载中...</div>
 	  </div>
 
 	</div>	
@@ -33,7 +37,29 @@
 		</div>
 	</div>
 </script>
-
+<script type="text/template" class = "PM25Temp">
+	数据来源<a target = "_blank" href="http://www.pm25.in/">PM25.in</a>
+	<table class="table table-hover table-striped">
+		<thead>
+			<tr>
+				<td>地点</td>
+				<td>空气质量</td>
+				<td>pm2.5指数</td>
+			</tr>
+		</thead>
+		<tbody>
+			<% data.forEach(function(each){ %>
+				<% if(each.position_name) { %>
+					<tr>
+						<td><%= each.position_name %></td>
+						<td><%= each.quality %></td>
+						<td><%= each.pm2_5_24h %></td>
+					</tr>
+				<% }  %> 
+			<% });  %> 
+		</tbody>
+	</table>
+</script>
 
 
 

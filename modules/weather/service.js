@@ -86,6 +86,30 @@ function getWeatherEnName(cnName){
 	return enName;
 }
 
+var airPollutionKey = require('../../appKey').airPolloution;
+function getPM25(cityName, callback) {
+	cityName = cityName || 'suzhou';
+	var url = 'http://www.pm25.in/api/querys/pm2_5.json?city=suzhou&token=' 
+		+ airPollutionKey;
+	nodegrass.get(url,function(data,status,headers){
+		try{
+			callback && callback({
+				code:'1',
+				data: JSON.parse(data)
+			});
+		}catch(e){
+			logger.error(__dirname + ':' + e);
+			callback({
+				code:'0',
+				data:url + ': error' 
+			});
+		}
+	}).on('error', function(e) {
+	    logger.error(__dirname + ':' + e);
+	});
+}
+
 module.exports = {
 	'getWeatherReport':getWeatherReport
+	, 'getPM25':getPM25
 }

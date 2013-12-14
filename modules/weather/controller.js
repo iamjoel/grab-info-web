@@ -6,6 +6,14 @@ function list(req,res){
 	});
 };
 
+function PM25(req, res) {
+	var cityName = req.params.cityName;
+	service.getPM25(cityName,function(data){
+		res.send(data);
+	})
+}
+
 module.exports = {
 	list:list
+	, PM25 : PM25
 };

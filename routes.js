@@ -13,10 +13,12 @@ module.exports = function(app){
     app.get(API_PREFIX + '/module', moduleControl.list);
 
     var weatherController = require('./modules/weather/controller');
+    app.get(API_PREFIX + '/weather/PM25/:cityName',weatherController.PM25);
     app.get(API_PREFIX + '/weather/:cityName',weatherController.list);
 
     var restaurantController = require('./modules/restaurant/controller');
     app.get(API_PREFIX + '/restaurant/:cityName',restaurantController.rank);//喜爱程度从高到低
+
     
     app.get(API_PREFIX, function(req, res){
         res.send({

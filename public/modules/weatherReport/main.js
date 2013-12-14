@@ -41,18 +41,27 @@ define(function(require){
 			if(!$this.data('hasInit')){
 				setTimeout(function(){
 					renderWeatherTrendReport(weatherTrendData);
-					$this.data('hasInit',true);
+					$this.data('h²asInit',true);
 				},10);
 				
 			}
 		});	
 
+
+		$('[href=#PM25Wrap]',$root).click(function(){
+			currentTab = 'PM25';
+			rederPM25();
+			//http://www.pm25.in/api/querys/pm2_5.json?city=suzhou&token=5j1znBVAsnSf5xQyNQyq
+		});
+
 		$('.refreshBtn',$root).click(function(){
 			getWeatherData(cityName, function(data){
 				if(currentTab == 'todayWeather'){
 					renderTodayWeatherReport(todayWeatherData);
-				}else{
+				} else if(currentTab == 'weatherTrend'){
 					renderWeatherTrendReport(weatherTrendData);
+				} else {
+					rederPM25();
 				}
 			});
 		});
@@ -235,6 +244,18 @@ define(function(require){
 			$('#weatherTip').remove();
 		}
 	};
+
+	function rederPM25() {
+		var url = config.URL.weather + 'PM25/' + cityName;
+		$.ajax({
+			url : url
+			, dataType : 'json'
+		}).done(function(data){
+			$('#PM25').html(_.template($('.PM25Temp').html(),{
+				data : data.data
+			}));
+		});
+	}
 
 	function getIconClass(weatherName){
 		var map = {
