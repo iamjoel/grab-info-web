@@ -85,7 +85,7 @@ define(function(require, exports){
           self.views.push({
              model : each
              , view : new ModulesTagView({
-                el : '.nav-contonts li[data-id=' + each.get('id') + ']'
+                el : '#model-tag-' + each.get('id')
                 , model : each
              })
           });

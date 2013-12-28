@@ -60,7 +60,7 @@ body .nav-tabs li:first{
 	padding-left: 10px;
 }
 body .tab-pane{
-	padding: 20px;
+	padding: 10px;
 }
 .panel-body{
 	height: 560px;
@@ -72,13 +72,4 @@ body .tab-pane{
 }
 .nav-model-tag {
   padding-left: 20px;
-}
-.nav-contonts>ul {
-  padding: 0;
-}
-.nav-contonts>ul>li {
-  display: none;
-}
-.nav-contonts>ul>li.active {
-  display: block;
 }
