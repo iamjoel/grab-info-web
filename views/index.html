@@ -1,17 +1,65 @@
+<ul class="nav nav-tabs nav-model-tag">
+<% modules.forEach(function(moduleTag, i) { %>
+      <% if (i == 0) { %>
+        <li class="active" data-id = "<%= moduleTag.id %>">
+      <% } else { %>
+        <li data-id = "<%= moduleTag.id %>">
+      <% } %> 
+          <a href="javascript:void(0);" >
+            <%= moduleTag.name %>
+          </a>
+        </li>
+<% }); %>
+</ul>
+<div class="nav-contonts padded">
+    <ul class="unstyled">
+      <% modules.forEach(function(moduleTag, i) { %>
+          <% if (i == 0) { %>
+            <li class="active" data-id = "<%= moduleTag.id %>">
+          <% } else { %>
+            <li data-id = "<%= moduleTag.id %>">
+          <% } %> 
+            </li>
+    <% }); %>
+  </ul>
+</div>
+
+
+
 <script type="text/javascript">
    $(function() {
     var paths = {
       script : '/public/scripts'
       , lib : '/public/scripts/lib'
     };
-
-    <% modules.forEach(function(module) { %>
-      paths.<%=module.id %> = '<%= "/public/modules/" + module.id %>';
+    <% modules.forEach(function(moduleTag, i) { %>
+      <% moduleTag.modules.forEach(function(module) { %>
+      paths.<%= module.id %> = '/public/modules/<%= module.id %>';
+      <% }); %>
     <% }); %>
-
     seajs.config({
       base : '/public'
       ,paths : paths 
+    });
+
+    var $tabWrap = $('#main .nav-tabs');
+    var $contentWrap = $('#main .nav-contonts');
+    $('.nav-tabs li').click(function (){
+      var $this = $(this);
+      if(!$this.is('active')){
+        var id = $this.data('id');
+        $tabWrap.find('li').removeClass('active');
+        $this.addClass('active');
+        $contentWrap.find('li').each(function(){
+          var $li = $(this);
+          if($li.data('id') === id) {
+            $li.addClass('active');
+          } else {
+            $li.removeClass('active');
+          }
+        });
+      }
+      
     });
 
     seajs.use('/public/scripts/main', function(util) {

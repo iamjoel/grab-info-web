@@ -1,5 +1,8 @@
+.padded {
+  padding : 15px;
+}
 #main{
-    margin-top:100px;
+    
 }
 #forkOnGitHubWrap{
   position: absolute; 
@@ -66,4 +69,16 @@ body .tab-pane{
 	overflow: hidden;
 	position: relative;
 	height: 530px;
+}
+.nav-model-tag {
+  padding-left: 20px;
+}
+.nav-contonts>ul {
+  padding: 0;
+}
+.nav-contonts>ul>li {
+  display: none;
+}
+.nav-contonts>ul>li.active {
+  display: block;
 }

@@ -1,12 +1,12 @@
 var config = require('../config');
-module.exports.render = function(req,res,next){
-	var moduleNames = config.showModules,
-		modules = [];
-	moduleNames.forEach(function(each){
-		modules.push(require('../modules/' + each + '/config'));
-	});
-	// console.log(modules);	
-    res.render('index',{
-    	modules:modules
+var user = require('../models/user');
+module.exports.render = function(req, res, next) {
+    var userId = 0;
+    if (req.session.userId != null) {
+        userId = req.session.userId;
+    }
+   	
+    res.render('index', {
+        modules: user.getModules(userId)
     });
 };

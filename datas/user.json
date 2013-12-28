@@ -1,0 +1,13 @@
+[{
+    "id": 0,
+    "name": "default",
+    "modules": [{
+        "id": 1,
+        "name": "首页",
+        "list": ["weather", "constellation"]
+    }, {
+        "id": 2,
+        "name": "生活",
+        "list": ["restaurant"]
+    }]
+}]

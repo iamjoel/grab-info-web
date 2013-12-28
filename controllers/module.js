@@ -1,18 +1,16 @@
 var constant = require('../constant');
 var SUCCESS_CODE = constant.SUCCESS_CODE;
 var ERROR_CODE = constant.ERROR_CODE;
+var user = require('../models/user');
 module.exports.list = function(req, res) {
-	// 以后从cookie中取
-	var modules = require('../config').showModules;
-	var data = [];
+	var userId = 0;
+    if (req.session.userId != null) {
+        userId = req.session.userId;
+    }
 	try {
-		modules.forEach(function(each) {
-			var module = require('../modules/' + each + '/config');
-			data.push(module); 
-		});
 		res.send({
 			success : SUCCESS_CODE
-			, data : data
+			, data : user.getModules(userId)
 		});	
 	} catch (err){
 		res.send({
