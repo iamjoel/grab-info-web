@@ -6,6 +6,7 @@ define(function(require){
 	require('/public/styles/weather-icons/css/weather-icons.min.css');
 	require('scripts/jquery.flot'); //chat插件
 	require('scripts/jquery.flot.time'); //chat的x轴显示时间，否则只能显示数字
+	require('scripts/jquery.echarts-plain');
 
 	var $root = $('#weatherReport');
 	var tpl = require('weatherReport/main.html#');
