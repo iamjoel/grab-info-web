@@ -1,6 +1,7 @@
 var nodegrass = require('nodegrass');
 var util = require('../../util');
 var logger = util.logger;
+var config = require('../../config');
 //用中央气象台提供的api,接口参考 http://g.kehou.com/t1029846752.html
 var cityNameCodeMapping = {
 	'suzhou': '101190401'
@@ -85,8 +86,7 @@ var cityNameCodeMapping = {
 		}
 		return enName;
 	}
-
-var airPollutionKey = require('../../appKey').airPolloution;
+var airPollutionKey = require(config.basePath + '/appKey').airPolloution;
 
 function getPM25(cityName, callback) {
 	cityName = cityName || 'suzhou';

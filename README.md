@@ -29,7 +29,7 @@
 
 
 效果图:    
-![概览](http://img.hb.aicdn.com/8b261f7a64a6a6a6b69870c3fe3ecc002f70a640283c6-0akA69_fw580)      
+![概览](http://img.hb.aicdn.com/ebde096936f0e2fad940a16eeae3bbbd2436e1512602b-FZBJSF_fw658)      
 更多请点击 [这里](http://huaban.com/boards/13744965/)查看
 
 ## <a name="projectStyle">项目编码规范</a>

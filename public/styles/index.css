@@ -1,5 +1,20 @@
+body {
+  background: #efefef;
+}
 .padded {
   padding : 15px;
+}
+.navbar-inverse {
+  background:#5BB793; 
+  border:none;
+}
+.navbar-inverse .navbar-brand {
+  color: #fff;
+}
+.logo {
+  height: 20px;
+  width: 20px;
+  margin-top: -1px;
 }
 #main{
     
@@ -73,3 +88,5 @@ body .tab-pane{
 .nav-model-tag {
   padding-left: 20px;
 }
+
+
