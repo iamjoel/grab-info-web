@@ -160,7 +160,7 @@ define(function(require) {
 			if (i == 0) {
 				xAxis.push('今天' + '(' + weekDay + ')');
 			} else {
-				xAxis.push(showDate.format('MM月DD日') + '(' + weekDay + ')');
+				xAxis.push(showDate.format('MM月DD日'));
 			}
 			showDate.add(1, 'd');
 		}
@@ -186,6 +186,7 @@ define(function(require) {
 			},
 			xAxis: [{
 				type: 'category',
+				boundaryGap : false,
 				data: xAxis
 			}],
 			yAxis: [{
